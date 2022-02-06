@@ -1,7 +1,6 @@
 //author : Pirlouit DUMEZ
 
 package fr.isen.java2.db.daos;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import fr.isen.java2.db.entities.Genre;
 
 public class GenreDao {
