@@ -5,13 +5,14 @@ import fr.isen.java2.db.entities.Film;
 import fr.isen.java2.db.entities.Genre;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
+import java.util.List;
+import org.junit.Before;
+import org.junit.Test;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
-import java.util.List;
-import org.junit.Before;
-import org.junit.Test;
+
 
 
 public class FilmDaoTestCase {
