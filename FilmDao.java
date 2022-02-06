@@ -1,11 +1,15 @@
 package fr.isen.java2.db.daos;
+
+
+import java.util.ArrayList;
+import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+
+
 import fr.isen.java2.db.entities.Film;
 
 public class FilmDao {
@@ -60,43 +64,27 @@ public class FilmDao {
 	}
 
 	public static Film addFilm(Film film) {
-		
 		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
-	        String sqlQuery = "INSERT INTO film(title,release_date,genre_id,duration,director,summary) VALUES(?,?,?,?,?,?)";
+	        String sqlQuery = "insert into film(title, release_date, genre_id, duration, director, summary) "+"VALUES(?,?,?,?,?,?)";
 	        try (PreparedStatement statement = connection.prepareStatement(
 	                        sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
 	            statement.setString(1, film.getTitle());
-	            statement.setDate(2, Date.valueOf(film.getReleaseDate()));
-	            statement.setInt(3, film.getGenre().getId());
+	            statement.setObject(2, film.getReleaseDate());
+	            statement.setObject(3, film.getGenre());
 	            statement.setInt(4, film.getDuration());
 	            statement.setString(5, film.getDirector());
 	            statement.setString(6, film.getSummary());
-	            statement.executeUpdate();
-	        }
-	    }catch (SQLException e) {
-	        // Manage Exception
-	        e.printStackTrace();
-	        
-	    }
-		
-		int id = -1;
-	    try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
-	    	String sqlQuery = "SELECT * FROM film where (film.title=? and film.director=?)";	    	
-	        try (PreparedStatement statement = connection.prepareStatement(sqlQuery)) {
-		    	statement.setString(1, film.getTitle());
-		    	statement.setString(2, film.getDirector());
-	            try (ResultSet results = statement.executeQuery()) {
-	                while (results.next()) {
-	                	id = results.getInt("idfilm");
-	                }
+	            statement.executeUpdate();   
+	            ResultSet ids = statement.getGeneratedKeys();
+	            if (ids.next()) {
+	                return new Film(ids.getInt(1), film.getTitle(), film.getReleaseDate(), film.getGenre(), film.getDuration(), film.getDirector(), film.getSummary());
 	            }
 	        }
-	    } catch (SQLException e) {
+	    }
+	    catch (SQLException e) {
 	        // Manage Exception
 	        e.printStackTrace();
 	    }
-		
-		film.setId(id);
-		return film;
+	return null;
 	}
 }
