@@ -1,8 +1,6 @@
 //author : Pirlouit DUMEZ
 
 package fr.isen.java2.db.daos;
-
-
 import fr.isen.java2.db.entities.Film;
 import fr.isen.java2.db.entities.Genre;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,9 +13,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-
-
-//auteur: Valentin Cordonnier
 
 public class FilmDaoTestCase {
 	
