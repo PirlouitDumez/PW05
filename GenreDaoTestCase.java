@@ -1,18 +1,14 @@
 //author : Pirlouit DUMEZ
 
 package fr.isen.java2.db.daos;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
-
+import org.junit.Before;
+import org.junit.Test;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.List;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import fr.isen.java2.db.entities.Genre;
 
 public class GenreDaoTestCase {
