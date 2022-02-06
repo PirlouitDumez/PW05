@@ -1,4 +1,5 @@
 //author : Pirlouit DUMEZ
+
 package fr.isen.java2.db.daos;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,15 +8,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-
 import fr.isen.java2.db.entities.Film;
 
 public class FilmDao {
 
 	public List<Film> listFilms() {
-		List<Film> listOfFilms = new ArrayList<>();
-	    
+		List<Film> listOfFilms = new ArrayList<>();	    
 	    try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
 	    	try (Statement statement = connection.createStatement()) {
 	            try (ResultSet results = statement.executeQuery("SELECT * FROM film JOIN genre ON film.genre_id = genre.idgenre")) {
